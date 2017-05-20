@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +18,7 @@ public class PropertyController {
 	@Autowired
 	PropertyDao dao;
 
-	@RequestMapping(path = "listProperties.do", method = RequestMethod.GET)
+	@RequestMapping(path="listProperties.do", method=RequestMethod.GET)
 	public ModelAndView getPropertyList() {
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/listOfProperties.jsp");
 		List<Property> props = dao.getAllProperties();
@@ -25,13 +26,13 @@ public class PropertyController {
 		return mv;
 	}
 
-	@RequestMapping(path = "add.do", method = RequestMethod.GET)
+	@RequestMapping(path="add.do", method=RequestMethod.GET)
 	public ModelAndView goToAddView() {
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/addProperty.jsp");
 		return mv;
 	}
 
-	@RequestMapping(path = "addProperty.do", method = RequestMethod.POST)
+	@RequestMapping(path="addProperty.do", method=RequestMethod.POST)
 	public String addProperty(Property newProp) {
 
 		try {
@@ -42,7 +43,7 @@ public class PropertyController {
 		return "redirect: listProperties.do";
 	}
 
-	@RequestMapping(path = "viewProperty.do", method = RequestMethod.GET)
+	@RequestMapping(path="viewProperty.do", method=RequestMethod.GET)
 	public ModelAndView viewProperty(String address) {
 
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/viewProperty.jsp");
@@ -50,14 +51,32 @@ public class PropertyController {
 		return mv;
 	}
 
-	@RequestMapping(path = "removeProp.do", method = RequestMethod.POST)
+	@RequestMapping(path="removeProp.do", method=RequestMethod.POST)
 	public String removeProperty(String address) {
-		System.out.println(dao.getPropertyByAddress(address));
-		 try {
-		 dao.removeProperty(address);
-		 } catch (IOException e) {
+		 
+		try {
+			dao.removeProperty(address);
+		} catch (IOException e) {
 		 e.printStackTrace();
-		 }
+		}
+		return "redirect: listProperties.do";
+	}
+	
+	@RequestMapping(path="edit.do", method=RequestMethod.GET)
+	public ModelAndView goToEditView(String address) {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/editProperty.jsp");
+		mv.addObject("property", dao.getPropertyByAddress(address));
+		mv.addObject("addressBeforeEdit", address);
+		return mv;
+	}
+	
+	@RequestMapping(path="editProperty.do", method=RequestMethod.POST)
+	public String editProperty(String addressBeforeEdit, String address, 
+			Double rent, Double purchasePrice, Double capRate, Model m) {
+	
+		dao.editProperty(addressBeforeEdit, address, rent, 
+				purchasePrice, capRate);
+		m.addAttribute("properties", dao.getAllProperties());
 		return "redirect: listProperties.do";
 	}
 

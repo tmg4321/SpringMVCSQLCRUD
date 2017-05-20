@@ -12,7 +12,7 @@
 <h2>Properties</h2>
 <c:forEach var="property" items="${properties}">
 	<form action="viewProperty.do" method="get">
-Address: ${property.address} Rent: ${property.rent} 
+	Address: ${property.address} Rent: ${property.rent} 
 	Purchase Price: ${property.purchasePrice} Cap Rate: ${property.capRate}
 	<input type="hidden" name="address" value="${property.address}"/>
 	<input type="submit" value="see more"/><br>

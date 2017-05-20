@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.security.auth.RefreshFailedException;
-import javax.security.auth.Refreshable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
@@ -36,12 +34,10 @@ public class PropertyDaoFileImpl implements PropertyDao {
 			while ((line = buf.readLine()) != null) {
 				String[] tokens = line.split("\\|");
 				String address = tokens[0];
-//				System.out.println(address);
 				Double rent = Double.parseDouble(tokens[1]);
 				Double purchasePrice = Double.parseDouble(tokens[2]);
 				Double capRate = Double.parseDouble(tokens[3]);
 				properties.add(new Property(address, rent, purchasePrice, capRate));
-//				System.out.println(properties);
 			}
 		} catch (Exception e) {
 			System.err.println(e);
@@ -68,6 +64,7 @@ public class PropertyDaoFileImpl implements PropertyDao {
 		return new ArrayList<>(properties);
 	}
 
+	@Override
 	public void addProperty(Property property) throws IOException {
 		
 		properties.add(property);
@@ -85,10 +82,32 @@ public class PropertyDaoFileImpl implements PropertyDao {
 		return null;
 	}
 	
+	@Override
 	public void removeProperty(String address) throws IOException {
 		Property p = getPropertyByAddress(address);
 		properties.remove(properties.indexOf(p));
 		updateFile();
+	}
+	
+	@Override
+	public void editProperty(String aBE, String address, 
+			Double rent, Double purchasePrice, Double capRate) {
+		Property propToEdit = getPropertyByAddress(aBE);
+		
+		System.out.println(aBE);
+		
+		properties.remove(propToEdit);
+		if (address != null){propToEdit.setAddress(address);}
+		if (rent != null){propToEdit.setRent(rent);}
+		if (purchasePrice != null){propToEdit.setPurchasePrice(purchasePrice);}
+		System.out.println(capRate);
+		if (capRate != null){propToEdit.setCapRate(capRate);}
+		properties.add(propToEdit);
+		try {
+			updateFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public PropertyDaoFileImpl() {

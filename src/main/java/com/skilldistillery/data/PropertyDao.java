@@ -9,4 +9,5 @@ public interface PropertyDao {
 	void addProperty(Property p) throws IOException;
 	void removeProperty(String s) throws IOException;
 	Property getPropertyByAddress(String address);
+	void editProperty(String aBE, String address, Double rent, Double purchasePrice, Double capRate);
 }

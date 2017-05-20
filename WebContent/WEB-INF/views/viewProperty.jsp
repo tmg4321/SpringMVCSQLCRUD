@@ -14,7 +14,11 @@ Address: ${property.address} Rent: ${property.rent}
 	Purchase Price: ${property.purchasePrice} Cap Rate: ${property.capRate}
 <form action="removeProp.do" method= "post">
 	<input type="hidden" name="address" value="${property.address}"/>
-	<input type="submit" value="remove"/>
+	<input type="submit" value="Remove"/>
+</form>
+<form action="edit.do" method= "get">
+	<input type="hidden" name="address" value="${property.address}"/>
+	<input type="submit" value="Edit"/>
 </form>
 
 </body>
