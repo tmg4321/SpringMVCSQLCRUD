@@ -1,5 +1,0 @@
-12
-12.50 
-false
-a
-A String

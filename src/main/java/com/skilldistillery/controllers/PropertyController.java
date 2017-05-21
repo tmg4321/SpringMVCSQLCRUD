@@ -20,7 +20,7 @@ public class PropertyController {
 
 	@RequestMapping(path="listProperties.do", method=RequestMethod.GET)
 	public ModelAndView getPropertyList() {
-		ModelAndView mv = new ModelAndView("/WEB-INF/views/listOfProperties.jsp");
+		ModelAndView mv = new ModelAndView("/WEB-INF/listOfProperties.jsp");
 		List<Property> props = dao.getAllProperties();
 		mv.addObject("properties", props);
 		return mv;
@@ -28,7 +28,7 @@ public class PropertyController {
 
 	@RequestMapping(path="add.do", method=RequestMethod.GET)
 	public ModelAndView goToAddView() {
-		ModelAndView mv = new ModelAndView("/WEB-INF/views/addProperty.jsp");
+		ModelAndView mv = new ModelAndView("/WEB-INF/addProperty.jsp");
 		return mv;
 	}
 
@@ -46,7 +46,7 @@ public class PropertyController {
 	@RequestMapping(path="viewProperty.do", method=RequestMethod.GET)
 	public ModelAndView viewProperty(String address) {
 
-		ModelAndView mv = new ModelAndView("/WEB-INF/views/viewProperty.jsp");
+		ModelAndView mv = new ModelAndView("/WEB-INF/viewProperty.jsp");
 		mv.addObject("property", dao.getPropertyByAddress(address));
 		return mv;
 	}
@@ -64,7 +64,7 @@ public class PropertyController {
 	
 	@RequestMapping(path="edit.do", method=RequestMethod.GET)
 	public ModelAndView goToEditView(String address) {
-		ModelAndView mv = new ModelAndView("/WEB-INF/views/editProperty.jsp");
+		ModelAndView mv = new ModelAndView("/WEB-INF/editProperty.jsp");
 		mv.addObject("property", dao.getPropertyByAddress(address));
 		mv.addObject("addressBeforeEdit", address);
 		return mv;

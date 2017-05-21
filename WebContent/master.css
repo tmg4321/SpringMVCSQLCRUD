@@ -1,0 +1,102 @@
+* {
+	
+}
+
+div#container {
+	background-color: #faebd7;
+	height: 4em;
+	width: 100%;
+	position: relative;
+	border-bottom: 0.25em solid #000;
+}
+
+div#bottom {
+	position: absolute;
+	bottom: 0.5em;
+	width: 100%;
+	text-align: center;
+	font-family: 'Oswald', sans-serif;
+	font-style: italic;
+	font-size: 2em;
+	border-bottom-color: black;
+	border-bottom-width: 1em;
+}
+
+h1 {
+	color: #b76e79;
+}
+
+div#body {
+	height: 100%;
+	background-color: #FDFDFD;
+	position: relative;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+	vertical-align: bottom;
+	margin-top: 4em;
+	
+}
+thead {
+	height: 1.5em;
+}
+
+th {
+	font-size: 1.5em;
+	font-family: 'Oswald', sans-serif;
+	font-style: italic;
+	vertical-align: bottom;
+	padding-bottom: .25em;
+	
+}
+tr {
+	height: 2em;
+	font-size: 1.1em;
+	font-family: 'Oswald', sans-serif;
+}
+td {
+	border: .15em solid lightblue;
+	vertical-align: middle;
+}
+
+#addressButton {
+	width: 100%;
+	height: 100%;
+	font-size: 1.1em;
+	font-family: 'Oswald', sans-serif;
+	background-color: #FDFDFD;
+}
+#addressButton:hover {
+	background-color: #faebd7;
+	color: #b76e79;
+	border: 0.25em solid #000;
+}
+
+div#addB {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: right;
+}
+input#addButton {
+	
+	width: 6em;
+    height: 6em;
+    background-color: #FDFDFD;
+ 	border: 0.01em solid #000;
+    border-radius: 50%;
+    font-size: 1em;
+    white-space: normal;
+}
+input#addButton:hover {
+	background-color: #faebd7;
+	color: #b76e79;
+	border: 0.25em solid #000;
+}
+
+
+
+
+
