@@ -21,9 +21,13 @@
 		<p>[add picture feature]</p>
 	</div>
 	<div id="rentAndCap">
- 		<p>&bull; Rent: $${property.rent}
-		&bull; Purchase Price: $${property.purchasePrice}
-		&bull; Cap Rate: <fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" />%</p>
+		<table id="viewProp">
+			<tr>
+				<td>Rent: $${property.rent}</td>
+				<td>Purchase Price: $${property.purchasePrice}</td>
+				<td>Cap Rate: <fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" />%</td>
+			</tr>
+		</table>
 	</div>
 	 <div id="notes">
 	 	<p>[add note feature]</p>

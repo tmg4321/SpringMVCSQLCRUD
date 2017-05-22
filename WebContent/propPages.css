@@ -40,19 +40,20 @@ div#pics {
 
 div#rentAndCap {
 	width: 100%;
-	height: 1em;
-	display: inline-block;
-    *display: inline; /* For IE7 */
-    zoom: 1; /* Trigger hasLayout */
+	height: 2em;
     width: 100%;
     text-align: center;
 	font-size: 2em;
 }
+div#rentAndCap table {
+	width: 100%;
+	margin-top: 1em;
+}
+
 div#notes {
-	height: 20em;
+	height: 25em;
     margin: 0px auto;
-    max-width: 960px;
-    min-width: 750px;
+    width:75%;
     padding: 0;
 	float: left;
 	background-color: lightyellow;

@@ -18,8 +18,8 @@
 			<h1>PROPERTIES</h1>
 		</div>
 	</div>
-	<div id=body>
-		<table>
+	<div id="body">
+		<table id="list">
 			<thead>
 				<tr>
 					<th>ADDRESS</th>

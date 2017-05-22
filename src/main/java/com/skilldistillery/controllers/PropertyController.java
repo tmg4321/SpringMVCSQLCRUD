@@ -36,7 +36,6 @@ public class PropertyController {
 	@RequestMapping(path="addProp.do", method=RequestMethod.POST)
 	public String addProperty(@RequestParam String address, @RequestParam Double rent,
 			@RequestParam Double purchasePrice) {
-		System.out.println("in addProperty.do");
 		Property newProp = new Property(address, rent, purchasePrice);
 		try {
 			dao.addProperty(newProp);

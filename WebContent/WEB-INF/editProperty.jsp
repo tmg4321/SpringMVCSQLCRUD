@@ -23,7 +23,7 @@
 	Purchase Price: 	<input type="text" name="purchasePrice" value="${property.purchasePrice}"/><br>
 	CapRate: <span id="cap"><fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" /></span><br>
 	<input type="hidden" name="addressBeforeEdit" value="${property.address}"/>
-	<input class="roundButton"type="submit" value="Save Updated Info"/>
+	<input class="roundButton"type="submit" value="Save"/>
 </form>
 </body>
 </html>
