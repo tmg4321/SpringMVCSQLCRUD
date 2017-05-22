@@ -19,7 +19,7 @@ input {
 input.roundButton {
 	width: 4.5em;
     height: 4.5em;
-    background-color: #FDFDFD;
+    background-color: #eef0fd;
  	border: 0.01em solid #000;
     border-radius: 50%;
     font-size: .75em;
