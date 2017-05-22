@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="propPages.css" media="screen">
 <title>Edit Property</title>
 </head>
-<<body>
+<body>
 	<div class=container>
 		<div class="bottom">
 			<h1>EDIT PROPERTY INFO</h1>
