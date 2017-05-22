@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.data.Property;
@@ -32,9 +33,11 @@ public class PropertyController {
 		return mv;
 	}
 
-	@RequestMapping(path="addProperty.do", method=RequestMethod.POST)
-	public String addProperty(Property newProp) {
-
+	@RequestMapping(path="addProp.do", method=RequestMethod.POST)
+	public String addProperty(@RequestParam String address, @RequestParam Double rent,
+			@RequestParam Double purchasePrice) {
+		System.out.println("in addProperty.do");
+		Property newProp = new Property(address, rent, purchasePrice);
 		try {
 			dao.addProperty(newProp);
 		} catch (IOException e) {

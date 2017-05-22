@@ -10,12 +10,12 @@ public class Property {
 		
 	}
 	
-	public Property(String address, Double rent, Double purchasePrice, Double capRate) {
+	public Property(String address, Double rent, Double purchasePrice) {
 		super();
 		this.address = address;
 		this.rent = rent;
 		this.purchasePrice = purchasePrice;
-		this.capRate = capRate;
+		setCapRate(rent, purchasePrice);
 	}
 	public String getAddress() {
 		return address;
@@ -28,18 +28,20 @@ public class Property {
 	}
 	public void setRent(Double rent) {
 		this.rent = rent;
+		setCapRate(rent, getPurchasePrice());
 	}
 	public Double getPurchasePrice() {
 		return purchasePrice;
 	}
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
+		setCapRate(getRent(), purchasePrice);
 	}
 	public Double getCapRate() {
 		return capRate;
 	}
-	public void setCapRate(Double capRate) {
-		this.capRate = capRate;
+	public void setCapRate(Double rent, Double purchasePrice) {
+		this.capRate = ((((rent-800)*12))/purchasePrice)*100;
 	}
 	
 	@Override

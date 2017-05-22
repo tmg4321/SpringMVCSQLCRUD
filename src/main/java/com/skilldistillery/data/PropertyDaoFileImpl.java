@@ -36,8 +36,8 @@ public class PropertyDaoFileImpl implements PropertyDao {
 				String address = tokens[0];
 				Double rent = Double.parseDouble(tokens[1]);
 				Double purchasePrice = Double.parseDouble(tokens[2]);
-				Double capRate = Double.parseDouble(tokens[3]);
-				properties.add(new Property(address, rent, purchasePrice, capRate));
+//				Double capRate = Double.parseDouble(tokens[3]);
+				properties.add(new Property(address, rent, purchasePrice));
 			}
 		} catch (Exception e) {
 			System.err.println(e);
@@ -100,8 +100,7 @@ public class PropertyDaoFileImpl implements PropertyDao {
 		if (address != null){propToEdit.setAddress(address);}
 		if (rent != null){propToEdit.setRent(rent);}
 		if (purchasePrice != null){propToEdit.setPurchasePrice(purchasePrice);}
-		System.out.println(capRate);
-		if (capRate != null){propToEdit.setCapRate(capRate);}
+//		if (capRate != null){propToEdit.setCapRate(capRate);}
 		properties.add(propToEdit);
 		try {
 			updateFile();

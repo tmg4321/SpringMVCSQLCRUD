@@ -2,7 +2,7 @@
 	
 }
 
-div#container {
+div.container {
 	background-color: #faebd7;
 	height: 4em;
 	width: 100%;
@@ -10,7 +10,7 @@ div#container {
 	border-bottom: 0.25em solid #000;
 }
 
-div#bottom {
+div.bottom {
 	position: absolute;
 	bottom: 0.5em;
 	width: 100%;
@@ -80,7 +80,7 @@ div#addB {
 	width: 100%;
 	text-align: right;
 }
-input#addButton {
+input.roundButton {
 	
 	width: 6em;
     height: 6em;
@@ -90,7 +90,7 @@ input#addButton {
     font-size: 1em;
     white-space: normal;
 }
-input#addButton:hover {
+input.roundButton:hover {
 	background-color: #faebd7;
 	color: #b76e79;
 	border: 0.25em solid #000;

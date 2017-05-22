@@ -13,8 +13,8 @@
 <title>List of Properties</title>
 </head>
 <body>
-	<div id=container>
-		<div id="bottom">
+	<div class=container>
+		<div class="bottom">
 			<h1>PROPERTIES</h1>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 						</td>
 						<td>${property.rent}</td>
 						<td>${property.purchasePrice}</td>
-						<td>${property.capRate}</td>
+						<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" /> %</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -48,16 +48,10 @@
 	</div>
 	<div id="addB">
 		<form action="add.do" method="get">
-			<input id="addButton" type="submit" value="Add Property" />
+			<input class="roundButton" type="submit" value="Add Property" />
 		</form>
 	</div>
 </body>
 </html>
 
-<!-- <form name="TrainerMenu" action="TrainerMenu" method="get">
 
-<h1>Benvenuto in LESSON! Scegli l'operazione da effettuare:</h1>
-<a href="Page2.jsp" id="CreateCourse" >Creazione Nuovo Corso</a>&nbsp;
-<a href="Page3.jsp" id="AuthorizationManager">Gestione Autorizzazioni</a>
-<input type="button" value="" name="AuthorizationManager" />
-</form> -->

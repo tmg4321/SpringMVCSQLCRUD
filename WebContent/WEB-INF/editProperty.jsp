@@ -6,18 +6,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="reset.css" media="screen" />
 <link rel="stylesheet" href="master.css" media="screen">
+<link rel="stylesheet" href="propPages.css" media="screen">
 <title>Edit Property</title>
 </head>
-<body>
-<h2>Update Property Information:</h2>
+<<body>
+	<div class=container>
+		<div class="bottom">
+			<h1>EDIT PROPERTY INFO</h1>
+		</div>
+	</div>
 <form action="editProperty.do" method="post">
 	Address:			<input type="text" name="address" value="${property.address}"/><br>
 	Monthly Rent: 	<input type="text" name="rent" value="${property.rent}"/><br>
 	Purchase Price: 	<input type="text" name="purchasePrice" value="${property.purchasePrice}"/><br>
-	CapRate: 		<input type="text" name="capRate" value="${property.capRate}"/>
+	CapRate: <span id="cap"><fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" /></span><br>
 	<input type="hidden" name="addressBeforeEdit" value="${property.address}"/>
-	<input type="submit" value="Save Updated Info"/>
+	<input class="roundButton"type="submit" value="Save Updated Info"/>
 </form>
 </body>
 </html>
