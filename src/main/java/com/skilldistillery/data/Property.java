@@ -1,26 +1,29 @@
 package com.skilldistillery.data;
 
+import java.util.List;
+
 public class Property {
-	private String address;
+	private Integer id;
+	private Address address;
 	private Double rent;
 	private Double purchasePrice;
-	private Double capRate;
+	private Caprate capRate;
+	private List<Note> notes;
+	private List<Picture> pictures;
 
 	public Property() {
 		
 	}
 	
-	public Property(String address, Double rent, Double purchasePrice) {
+	public Property(Address address) {
 		super();
 		this.address = address;
-		this.rent = rent;
-		this.purchasePrice = purchasePrice;
-		setCapRate(rent, purchasePrice);
 	}
-	public String getAddress() {
+	
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public Double getRent() {
@@ -28,22 +31,26 @@ public class Property {
 	}
 	public void setRent(Double rent) {
 		this.rent = rent;
-		setCapRate(rent, getPurchasePrice());
 	}
 	public Double getPurchasePrice() {
 		return purchasePrice;
 	}
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
-		setCapRate(getRent(), purchasePrice);
 	}
-	public Double getCapRate() {
+	public Caprate getCapRate() {
 		return capRate;
 	}
-	public void setCapRate(Double rent, Double purchasePrice) {
-		this.capRate = ((((rent-800)*12))/purchasePrice)*100;
+	public void setCapRate(Caprate capRate) {
+		this.capRate = capRate;
 	}
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -56,8 +63,5 @@ public class Property {
 		builder.append(capRate);
 		return builder.toString();
 	}
-	
-	
-	
-	
+
 }

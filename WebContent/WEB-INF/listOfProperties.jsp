@@ -23,8 +23,6 @@
 			<thead>
 				<tr>
 					<th>ADDRESS</th>
-					<th>RENT</th>
-					<th>PRICE</th>
 					<th>CAP RATE</th>
 				</tr>
 			</thead>
@@ -38,8 +36,6 @@
 								${property.address}</button>
 							</form>
 						</td>
-						<td>${property.rent}</td>
-						<td>${property.purchasePrice}</td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" /> %</td>
 					</tr>
 				</c:forEach>

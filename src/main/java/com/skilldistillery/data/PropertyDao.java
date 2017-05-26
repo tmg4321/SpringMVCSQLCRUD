@@ -6,8 +6,12 @@ import java.util.List;
 public interface PropertyDao {
 	void loadFile();
 	List<Property> getAllProperties();
-	void addProperty(Property p) throws IOException;
+	Property addPropertyToDb(Property p);
 	void removeProperty(String s) throws IOException;
-	Property getPropertyByAddress(String address);
 	void editProperty(String aBE, String address, Double rent, Double purchasePrice, Double capRate);
+	Address addAddressToDb(Address address);
+	Property getPropertyById(Integer propertyId);
+	Address getAddressById(Integer addressiId);
+	Caprate getCaprateById(Integer capRateId);
+	List<Note> getNotesByPropId(Integer propertyId);
 }

@@ -19,9 +19,10 @@
 	</div>
 	
 	<form action="addProp.do" method="post">
-		Address: <input type="text" name="address" /><br><br>
-		Monthly Rent: <input type="text" name="rent" /><br><br>
-		Purchase Price: <input type="text" name="purchasePrice" /><br><br>
+		Street Address: <input type="text" name="streetAddress" /><br><br>
+		City: <input type="text" name="city" /><br><br>
+		State Abbr.(e.g. FL or CO): <input type="text" name="stateAbbreviation" /><br><br>
+		Zip Code (5 digits): <input type="number" name="zipCode" /><br><br>
 		<input class="roundButton" type="submit" value="Save" />
 	</form>
 

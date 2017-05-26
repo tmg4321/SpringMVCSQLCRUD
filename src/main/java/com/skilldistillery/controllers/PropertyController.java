@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.skilldistillery.data.Address;
 import com.skilldistillery.data.Property;
 import com.skilldistillery.data.PropertyDao;
 
@@ -34,22 +35,19 @@ public class PropertyController {
 	}
 
 	@RequestMapping(path="addProp.do", method=RequestMethod.POST)
-	public String addProperty(@RequestParam String address, @RequestParam Double rent,
-			@RequestParam Double purchasePrice) {
-		Property newProp = new Property(address, rent, purchasePrice);
-		try {
-			dao.addProperty(newProp);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "redirect: listProperties.do";
+	public String addProperty(Address address, RedirectAttributes redir) {
+		address = dao.addAddressToDb(address);
+		Property newProp = new Property(address);
+		newProp = dao.addPropertyToDb(newProp);
+		redir.addAttribute("property", newProp);
+		return "redirect: viewProperty.do";
 	}
 
 	@RequestMapping(path="viewProperty.do", method=RequestMethod.GET)
-	public ModelAndView viewProperty(String address) {
+	public ModelAndView viewProperty(Property property) {
 
 		ModelAndView mv = new ModelAndView("/WEB-INF/viewProperty.jsp");
-		mv.addObject("property", dao.getPropertyByAddress(address));
+		mv.addObject("property", dao.getPropertyById(property.getId()));
 		return mv;
 	}
 

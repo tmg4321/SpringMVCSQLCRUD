@@ -92,7 +92,6 @@ public class PropertyDaoFileImpl implements PropertyDao {
 	public void editProperty(String aBE, String address, 
 			Double rent, Double purchasePrice, Double capRate) {
 		Property propToEdit = getPropertyByAddress(aBE);
-		
 		properties.remove(propToEdit);
 		if (address != null){propToEdit.setAddress(address);}
 		if (rent != null){propToEdit.setRent(rent);}
@@ -106,6 +105,12 @@ public class PropertyDaoFileImpl implements PropertyDao {
 	}
 
 	public PropertyDaoFileImpl() {
+		
+	}
+
+	@Override
+	public void addAddress(Address address) {
+		// TODO Auto-generated method stub
 		
 	}
 
