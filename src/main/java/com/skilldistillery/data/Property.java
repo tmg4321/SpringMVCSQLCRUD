@@ -44,6 +44,12 @@ public class Property {
 	public void setCapRate(Caprate capRate) {
 		this.capRate = capRate;
 	}
+	public List<Note> getNotes() {
+		return notes;
+	}
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
 	public Integer getId() {
 		return id;
 	}

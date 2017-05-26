@@ -9,9 +9,10 @@ public interface PropertyDao {
 	Property addPropertyToDb(Property p);
 	void removeProperty(String s) throws IOException;
 	void editProperty(String aBE, String address, Double rent, Double purchasePrice, Double capRate);
-	Address addAddressToDb(Address address);
+	Property addAddressToDb(Address address);
 	Property getPropertyById(Integer propertyId);
-	Address getAddressById(Integer addressiId);
+	Address getAddressByPropId(Integer propId);
 	Caprate getCaprateById(Integer capRateId);
 	List<Note> getNotesByPropId(Integer propertyId);
+	List<Picture> getPicturesByPropId(Integer propertyId);
 }

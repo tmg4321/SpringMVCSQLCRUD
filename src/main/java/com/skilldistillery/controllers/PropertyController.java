@@ -36,9 +36,7 @@ public class PropertyController {
 
 	@RequestMapping(path="addProp.do", method=RequestMethod.POST)
 	public String addProperty(Address address, RedirectAttributes redir) {
-		address = dao.addAddressToDb(address);
-		Property newProp = new Property(address);
-		newProp = dao.addPropertyToDb(newProp);
+		Property newProp = dao.addAddressToDb(address);
 		redir.addAttribute("property", newProp);
 		return "redirect: viewProperty.do";
 	}

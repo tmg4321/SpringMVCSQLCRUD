@@ -62,8 +62,12 @@ public class Caprate {
 		return rate;
 	}
 	private Double setRate(Integer costs, Integer rent, Integer purchasePrice) {
-		Double rate = (double)(((rent-costs)/purchasePrice)*100);
-		this.rate = rate;
+		Double rate = 0.0;
+		if (purchasePrice > 0) {
+			rate = (double)(((rent-costs)/purchasePrice)*100);
+			this.rate = rate;
+			return rate;
+		}
 		return rate;
 	}
 	@Override

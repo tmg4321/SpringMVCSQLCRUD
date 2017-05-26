@@ -1,17 +1,16 @@
 package com.skilldistillery.data;
 
-public class Note {
+public class Picture {
 	private Integer id;
 	private Integer propId;
-	private String note;
+	private String picture;
 	
-	public Note(String note, Integer propId) {
+	public Picture() {}
+	
+	public Picture(String picture, Integer propId) {
 		super();
-		this.note = note;
 		this.propId = propId;
-	}
-	public Note() {
-		
+		this.picture = picture;
 	}
 	public Integer getId() {
 		return id;
@@ -25,25 +24,24 @@ public class Note {
 	public void setPropId(Integer propId) {
 		this.propId = propId;
 	}
-	public String getNote() {
-		return note;
+	public String getPicture() {
+		return picture;
 	}
-	public void setNote(String note) {
-		this.note = note;
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Note [id=");
+		builder.append("Picture [id=");
 		builder.append(id);
 		builder.append(", propId=");
 		builder.append(propId);
-		builder.append(", note=");
-		builder.append(note);
+		builder.append(", picture=");
+		builder.append(picture);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 	
 }

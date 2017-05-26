@@ -45,14 +45,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pic_set`
+-- Table `picture`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pic_set` ;
+DROP TABLE IF EXISTS `picture` ;
 
-CREATE TABLE IF NOT EXISTS `pic_set` (
+CREATE TABLE IF NOT EXISTS `picture` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `pic_set` VARCHAR(10000) NULL,
-  `property_id` VARCHAR(45) NOT NULL,
+  `property_id` INT NOT NULL,
+  `picture` VARCHAR(10000) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -64,6 +64,7 @@ DROP TABLE IF EXISTS `caprate` ;
 
 CREATE TABLE IF NOT EXISTS `caprate` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `property_id` INT NOT NULL,
   `monthly_opcosts` INT NULL,
   `rent` INT NULL,
   `rate` DECIMAL(5,2) NULL,
@@ -79,15 +80,15 @@ DROP TABLE IF EXISTS `property` ;
 CREATE TABLE IF NOT EXISTS `property` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
+  `caprate_id` INT NULL,
   `note_id` INT NULL,
+  `picture_id` INT NULL,
   `rent` INT NULL,
   `purchase_price` INT NULL,
-  `caprate_id` INT NULL,
-  `picset_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_property_address_idx` (`address_id` ASC),
   INDEX `fk_property_note_idx` (`note_id` ASC),
-  INDEX `fk_property_picset_idx` (`picset_id` ASC),
+  INDEX `fk_property_picset_idx` (`picture_id` ASC),
   INDEX `fk_property_caprate_idx` (`caprate_id` ASC),
   CONSTRAINT `fk_property_address`
     FOREIGN KEY (`address_id`)
@@ -100,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `property` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_property_picset`
-    FOREIGN KEY (`picset_id`)
-    REFERENCES `pic_set` (`id`)
+    FOREIGN KEY (`picture_id`)
+    REFERENCES `picture` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_property_caprate`
@@ -152,9 +153,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `incomeproperties`;
-INSERT INTO `property` (`id`, `address_id`, `note_id`, `rent`, `purchase_price`, `caprate_id`, `picset_id`) VALUES (1, 1, 1, 4000, 300000, NULL, NULL);
-INSERT INTO `property` (`id`, `address_id`, `note_id`, `rent`, `purchase_price`, `caprate_id`, `picset_id`) VALUES (2, 2, 2, 5000, 400000, NULL, NULL);
-INSERT INTO `property` (`id`, `address_id`, `note_id`, `rent`, `purchase_price`, `caprate_id`, `picset_id`) VALUES (3, 3, 3, 7000, 450000, NULL, NULL);
+INSERT INTO `property` (`id`, `address_id`, `caprate_id`, `note_id`, `picture_id`, `rent`, `purchase_price`) VALUES (1, 1, NULL, 1, NULL, 4000, 300000);
+INSERT INTO `property` (`id`, `address_id`, `caprate_id`, `note_id`, `picture_id`, `rent`, `purchase_price`) VALUES (2, 2, NULL, 2, NULL, 5000, 400000);
+INSERT INTO `property` (`id`, `address_id`, `caprate_id`, `note_id`, `picture_id`, `rent`, `purchase_price`) VALUES (3, 3, NULL, 3, NULL, 7000, 450000);
 
 COMMIT;
 
