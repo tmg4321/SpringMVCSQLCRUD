@@ -22,7 +22,7 @@
 	Monthly Rent: 	<input type="text" name="rent" value="${property.rent}"/><br>
 	Purchase Price: 	<input type="text" name="purchasePrice" value="${property.purchasePrice}"/><br>
 	CapRate: <span id="cap"><fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" /></span><br>
-	<input type="hidden" name="addressBeforeEdit" value="${property.address}"/>
+	<input type="hidden" name="propId" value="${property.id}"/>
 	<input class="roundButton"type="submit" value="Save"/>
 </form>
 </body>

@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `caprate` (
   `property_id` INT NOT NULL,
   `monthly_opcosts` INT NULL,
   `rent` INT NULL,
+  `purchase_price` INT NULL,
   `rate` DECIMAL(5,2) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;

@@ -1,6 +1,5 @@
 package com.skilldistillery.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,34 +36,30 @@ public class PropertyController {
 	@RequestMapping(path="addProp.do", method=RequestMethod.POST)
 	public String addProperty(Address address, RedirectAttributes redir) {
 		Property newProp = dao.addAddressToDb(address);
-		redir.addAttribute("property", newProp);
+		redir.addAttribute("propId", newProp.getId());
 		return "redirect: viewProperty.do";
 	}
 
 	@RequestMapping(path="viewProperty.do", method=RequestMethod.GET)
-	public ModelAndView viewProperty(Property property) {
+	public ModelAndView viewProperty(Integer propId) {
 
 		ModelAndView mv = new ModelAndView("/WEB-INF/viewProperty.jsp");
-		mv.addObject("property", dao.getPropertyById(property.getId()));
+		mv.addObject("property", dao.getPropertyById(propId));
 		return mv;
 	}
 
 	@RequestMapping(path="removeProp.do", method=RequestMethod.POST)
-	public String removeProperty(String address) {
-		 
-		try {
-			dao.removeProperty(address);
-		} catch (IOException e) {
-		 e.printStackTrace();
-		}
+	public String removeProperty(Integer propId) {
+		
+		dao.deletePropertyByPropId(propId);
+		
 		return "redirect: listProperties.do";
 	}
 	
 	@RequestMapping(path="edit.do", method=RequestMethod.GET)
-	public ModelAndView goToEditView(String address) {
+	public ModelAndView goToEditView(Integer propId) {
 		ModelAndView mv = new ModelAndView("/WEB-INF/editProperty.jsp");
-		mv.addObject("property", dao.getPropertyByAddress(address));
-		mv.addObject("addressBeforeEdit", address);
+		mv.addObject("property", dao.getPropertyById(propId));
 		return mv;
 	}
 	

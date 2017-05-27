@@ -18,26 +18,28 @@
 		</div>
 	</div>
 	<div id="pics">
-		<p>[add picture feature]</p>
+		<p><img src="${picture.picture}" alt="Smiley face" height="42" width="42"/></p>
 	</div>
 	<div id="rentAndCap">
 		<table id="viewProp">
 			<tr>
 				<td>Rent: $${property.rent}</td>
 				<td>Purchase Price: $${property.purchasePrice}</td>
-				<td>Cap Rate: <fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate}" />%</td>
+				<td>Cap Rate: <fmt:formatNumber type="number" maxFractionDigits="2" value="${property.capRate.rate}" />%</td>
 			</tr>
 		</table>
 	</div>
 	 <div id="notes">
-	 	<p>[add note feature]</p>
+	 	<c:forEach var="line" items="${property.notes}">
+	 	<p>${line}</p>
+	 	</c:forEach>
 	 </div>
 <form action="removeProp.do" method= "post">
-	<input type="hidden" name="address" value="${property.address}"/>
+	<input type="hidden" name="propId" value="${property.id}"/>
 	<input class="roundButton" type="submit" value="Remove"/>
 </form>
 <form action="edit.do" method= "get">
-	<input type="hidden" name="address" value="${property.address}"/>
+	<input type="hidden" name="propId" value="${property.id}"/>
 	<input class="roundButton" type="submit" value="Edit"/>
 </form>
 

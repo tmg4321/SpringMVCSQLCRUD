@@ -50,6 +50,13 @@ public class Property {
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
+	public List<Picture> getPictures() {
+		return pictures;
+	}
+	public void setPictures(List<Picture> pictures) {
+		this.pictures = pictures;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -1,6 +1,5 @@
 package com.skilldistillery.data;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,8 +32,43 @@ public class PropertyDaoDbImpl implements PropertyDao {
 
 	@Override
 	public List<Property> getAllProperties() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Property> properties = new ArrayList<>();
+		String query = "SELECT id, address_id, note_id, caprate_id, picture_id, rent, "+
+				"purchase_price FROM property;";
+	
+		 try {
+			    Connection conn = DriverManager.getConnection(url, user, pass);
+			    Statement stmt = conn.createStatement();
+			    ResultSet rs = stmt.executeQuery(query);
+			    while (rs.next()) {
+			    		Integer propId			 = rs.getInt(1);
+//		    	        Integer addressId		 = rs.getInt(2);
+//		    	        Integer noteId       	 = rs.getInt(3);
+//		    	        	Integer capRateId		 = rs.getInt(4);
+//		    	        Integer pictureId		 = rs.getInt(5);
+		    			Double rent			 	 = rs.getDouble(6);
+		    			Double purchasePrice  	 = rs.getDouble(7);
+		    			
+		    			Address a = getAddressByPropId(propId);
+		    			Property prop = new Property(a);
+		    			prop.setId(propId);
+		    			prop.setRent(rent);
+		    			prop.setPurchasePrice(purchasePrice);
+		    			Caprate cR = getCaprateById(propId);
+		    			prop.setCapRate(cR);
+		    			List<Note> notes = getNotesByPropId(propId);
+		    			prop.setNotes(notes);
+		    			List<Picture> pictures = getPicturesByPropId(propId);
+		    			prop.setPictures(pictures);
+		    			properties.add(prop);
+			    }
+			    rs.close();
+			    stmt.close();
+			    conn.close();
+			  } catch (SQLException e) {
+			    e.printStackTrace();
+			  }
+		return properties;
 	}
 
 	@Override
@@ -62,9 +96,40 @@ public class PropertyDaoDbImpl implements PropertyDao {
 
 
 	@Override
-	public void removeProperty(String s) throws IOException {
-		// TODO Auto-generated method stub
-
+	public void deletePropertyByPropId(Integer propId) {
+		
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "DELETE FROM property WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, propId);
+			stmt.executeUpdate();
+			
+			String sql1 = "DELETE FROM address WHERE property_id = ?";
+			PreparedStatement stmt1 = conn.prepareStatement(sql1);
+			stmt1.setInt(1, propId);
+			stmt1.executeUpdate();
+			
+			String sql2 = "DELETE FROM note WHERE property_id = ?";
+			PreparedStatement stmt2 = conn.prepareStatement(sql2);
+			stmt2.setInt(1, propId);
+			stmt2.executeUpdate();
+			
+			String sql3 = "DELETE FROM caprate WHERE property_id = ?";
+			PreparedStatement stmt3 = conn.prepareStatement(sql3);
+			stmt3.setInt(1, propId);
+			stmt3.executeUpdate();
+			
+			String sql4 = "DELETE FROM picture WHERE property_id = ?";
+			PreparedStatement stmt4 = conn.prepareStatement(sql4);
+			stmt4.setInt(1, propId);
+			stmt4.executeUpdate();
+			
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -80,12 +145,13 @@ public class PropertyDaoDbImpl implements PropertyDao {
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 
-			String sql = "INSERT into address (street_address, city, state_abbreviation)"+
-					"values(?,?,?);";
+			String sql = "INSERT into address (street_address, city, state_abbreviation, zip_code)"+
+					"values(?,?,?,?);";
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, address.getStreetAddress());
 			stmt.setString(2, address.getCity());
 			stmt.setString(3, address.getStateAbbreviation());
+			stmt.setInt(4, address.getZipCode());
 			stmt.executeUpdate();
 			ResultSet keys = stmt.getGeneratedKeys();
 			if (keys.next()) {
@@ -116,7 +182,7 @@ public class PropertyDaoDbImpl implements PropertyDao {
 				newPropId = keys.getInt(1);
 			}
 			a.setPropertyId(newPropId);
-			String sql1 = "INSERT INTO address (property_id) VALUES (?) WHERE id = ?;";
+			String sql1 = "UPDATE address SET property_id = ? WHERE id = ?;";
 			PreparedStatement stmt1 = conn.prepareStatement(sql1);
 			stmt1.setInt(1, newPropId);
 			stmt1.setInt(2, a.getId());
@@ -128,6 +194,7 @@ public class PropertyDaoDbImpl implements PropertyDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		property = getPropertyById(newPropId);
 		return property;
 	}
 	
@@ -187,10 +254,10 @@ public class PropertyDaoDbImpl implements PropertyDao {
 				property.setNotes(notes);
 				List<Picture> pictures = new ArrayList<>();
 				pictures = getPicturesByPropId(propId);
+				property.setPictures(pictures);
 				property.setRent(rent);
 				property.setPurchasePrice(purchasePrice);
-				
-				Caprate cr = getCaprateById(capRateId);
+				Caprate cr = getCaprateById(propId);
 				property.setCapRate(cr);
 				
 			}
@@ -200,28 +267,27 @@ public class PropertyDaoDbImpl implements PropertyDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return film;
+		return property;
 	}
 
 	@Override
-	public Caprate getCaprateById(Integer id) {
+	public Caprate getCaprateById(Integer propId) {
 		Caprate capRate = null;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql = "SELECT id, property_id, street_address, city, state_abbreviation,"
-					+ "zip_code FROM address WHERE id = ?;";
+			String sql = "SELECT id, property_id, monthly_opcosts, rent, purchase_price FROM caprate WHERE property_id = ?;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, id);
+			stmt.setInt(1, propId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				int capRateId = rs.getInt(1);
-				int propId = rs.getInt(2);
+				int propertyId = rs.getInt(2);
 				int monthlyOpCosts = rs.getInt(3);
 				int monthlyRent = rs.getInt(4);
 				int purchasePrice = rs.getInt(5);
 				capRate = new Caprate(monthlyOpCosts, monthlyRent, purchasePrice);
 				capRate.setId(capRateId);
-				capRate.setPropId(propId);
+				capRate.setPropId(propertyId);
 			}
 			rs.close();
 			stmt.close();
@@ -244,8 +310,8 @@ public class PropertyDaoDbImpl implements PropertyDao {
 			while (rs.next()) {
 				int noteId = rs.getInt(1);
 				int propertyId = rs.getInt(2);
-				String note = rs.getString(3).trim();
-				Note n = new Note(note, propertyId);
+				String line = rs.getString(3).trim();
+				Note n = new Note(line, propertyId);
 				n.setId(noteId);
 				notes.add(n);
 			}

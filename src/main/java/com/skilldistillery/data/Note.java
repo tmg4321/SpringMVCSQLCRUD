@@ -3,11 +3,11 @@ package com.skilldistillery.data;
 public class Note {
 	private Integer id;
 	private Integer propId;
-	private String note;
+	private String line;
 	
 	public Note(String note, Integer propId) {
 		super();
-		this.note = note;
+		this.line = note;
 		this.propId = propId;
 	}
 	public Note() {
@@ -25,22 +25,16 @@ public class Note {
 	public void setPropId(Integer propId) {
 		this.propId = propId;
 	}
-	public String getNote() {
-		return note;
+	public String getLine() {
+		return line;
 	}
-	public void setNote(String note) {
-		this.note = note;
+	public void setLine(String note) {
+		this.line = note;
 	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Note [id=");
-		builder.append(id);
-		builder.append(", propId=");
-		builder.append(propId);
-		builder.append(", note=");
-		builder.append(note);
-		builder.append("]");
+		builder.append(line);
 		return builder.toString();
 	}
 	

@@ -32,7 +32,7 @@
 						
 						<td>
 							<form action="viewProperty.do" method="get">
-								<button id="addressButton" type="submit" name="address" value="${property.address}">
+								<button id="addressButton" type="submit" name="propId" value="${property.id}">
 								${property.address}</button>
 							</form>
 						</td>
